@@ -16,4 +16,11 @@ router.get("/", (req, res) => {
     })
 })
 
+router.get("/:collection", (req, res) => {
+    db.collection("csgo-skins-collection").findOne({ name: req.params.collection }, (err, col) => {
+        if (err) console.log(err)
+        res.send(col.skins)
+    })
+})
+
 module.exports = router
