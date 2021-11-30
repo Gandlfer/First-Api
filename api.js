@@ -11,6 +11,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/copypasta", require("./copypastaController"))
+app.use("/csgo", require("./skinsController"))
 
 app.listen(8800, (err) => {
     if (err) {
