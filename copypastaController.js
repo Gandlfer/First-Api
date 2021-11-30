@@ -12,7 +12,8 @@ MongoClient.connect(dbUrl, (err, con) => {
 
 router.get("/", (req, res) => {
     db.collection("copypasta").find().toArray((err, products) => {
-        res.send(products)
+        console.log(products[1].name.replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>"))
+        res.send(products[1].name.replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>").replace("\n", "<br>"))
     })
 })
 
