@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mongo = require("mongodb")
 var MongoClient = mongo.MongoClient
-const dbUrl = "mongodb://192.168.0.252:27017"
+const dbUrl = "mongodb://" + process.env.MONGODBIP + ":" + process.env.MONGODBPORT
 var db;
 
 MongoClient.connect(dbUrl, (err, con) => {

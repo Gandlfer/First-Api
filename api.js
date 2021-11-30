@@ -1,5 +1,5 @@
-var express = require("express");
-
+const express = require("express");
+const dotenv = require("dotenv").config();
 var app = express();
 var bodyParser = require("body-parser");
 
@@ -13,10 +13,10 @@ app.get("/", (req, res) => {
 app.use("/copypasta", require("./copypastaController"))
 app.use("/csgo", require("./skinsController"))
 
-app.listen(8800, (err) => {
+app.listen(process.env.PORT, (err) => {
     if (err) {
         console.log(err)
     } else {
-        console.log("Starting port 8800")
+        console.log("Starting port " + process.env.PORT)
     }
 })
