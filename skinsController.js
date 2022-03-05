@@ -11,16 +11,28 @@ MongoClient.connect(dbUrl, (err, con) => {
 })
 
 router.get("/", (req, res) => {
-    db.collection("csgo-skins-collection").find().toArray((err, col) => {
+    db.collection("csgo-skins-collection").find({}, { projection: { _id: 0 } }).toArray((err, col) => {
         res.send(col)
     })
 })
 
 router.get("/:collection", (req, res) => {
-    db.collection("csgo-skins-collection").findOne({ name: req.params.collection }, (err, col) => {
-        if (err) console.log(err)
-        res.send(col.skins)
-    })
+
+    db.collection("csgo-skins-collection").findOne({ name: req.params.collection })
+        .then((result) => {
+            try {
+                res.json({
+                    status: "Success",
+                    data: result.skins
+                })
+            } catch (Exception) {
+                res.json({
+                    status: "Error",
+                    data: "Fail to get data for " + req.params.collection
+                })
+            }
+        })
+
 })
 
 module.exports = router
