@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
         res.send(toString(products))
     })
 })
-router.get("/:index", (req, res) => {
+router.get("/raw/:index", (req, res) => {
     console.log(req.params.index)
     db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
         .then(
@@ -35,6 +35,22 @@ router.get("/:index", (req, res) => {
                             copypasta: result.copypasta
                         }
                     })
+                } catch (Exception) {
+                    res.json({
+                        status: "Error",
+                        data: "Fail to get data for " + req.params.index
+                    })
+                }
+            }
+        )
+})
+router.get("/:index", (req, res) => {
+    console.log(req.params.index)
+    db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
+        .then(
+            (result) => {
+                try {
+                    res.send(result.copypasta.replaceAll("\n", "<br>"))
                 } catch (Exception) {
                     res.json({
                         status: "Error",
