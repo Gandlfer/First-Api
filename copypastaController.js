@@ -58,7 +58,7 @@ router.get("/:index", (req, res) => {
             }
         )
 })
-router.get("/count", (req, res) => {
+router.get("/_get_count", (req, res) => {
     print(db.collection("copypasta").count())
 })
 
