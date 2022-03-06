@@ -22,7 +22,8 @@ router.get("/", (req, res) => {
         res.send(toString(products))
     })
 })
-router.get("/raw/:index", (req, res) => {
+
+router.get("/getraw/:index", (req, res) => {
     db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
         .then(
             (result) => {
@@ -43,7 +44,24 @@ router.get("/raw/:index", (req, res) => {
             }
         )
 })
-router.get("/:index", (req, res) => {
+router.get("/count", (req, res) => {
+    db.collection("copypasta").count().then((result) => {
+        try {
+            res.json({
+                status: "Success",
+                data: {
+                    count: result
+                }
+            })
+        } catch (Exception) {
+            res.json({
+                status: "Error",
+                data: "Fail to get data"
+            })
+        }
+    })
+})
+router.get("/get/:index", (req, res) => {
     db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
         .then(
             (result) => {
@@ -58,8 +76,6 @@ router.get("/:index", (req, res) => {
             }
         )
 })
-router.get("/_get_count", (req, res) => {
-    print(db.collection("copypasta").count())
-})
+
 
 module.exports = router
