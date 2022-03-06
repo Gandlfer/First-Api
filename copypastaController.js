@@ -23,7 +23,6 @@ router.get("/", (req, res) => {
     })
 })
 router.get("/raw/:index", (req, res) => {
-    console.log(req.params.index)
     db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
         .then(
             (result) => {
@@ -45,7 +44,6 @@ router.get("/raw/:index", (req, res) => {
         )
 })
 router.get("/:index", (req, res) => {
-    console.log(req.params.index)
     db.collection("copypasta").findOne({ "index": parseInt(req.params.index) })
         .then(
             (result) => {
@@ -59,6 +57,9 @@ router.get("/:index", (req, res) => {
                 }
             }
         )
+})
+router.get("/count", (req, res) => {
+    print(db.collection("copypasta").count())
 })
 
 module.exports = router
