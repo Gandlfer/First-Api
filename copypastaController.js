@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mongo = require("mongodb")
 var MongoClient = mongo.MongoClient
-const dbUrl = "mongodb://" + process.env.MONGODBIP + ":" + process.env.MONGODBPORT
+const dbUrl = "mongodb://" + process.env.USER + ":" + process.env.PWD + "@" + process.env.MONGODBIP + ":" + process.env.MONGODBPORT
 var db;
 
 function toString(arr) {
@@ -38,7 +38,7 @@ router.get("/getraw/:index", (req, res) => {
                 } catch (Exception) {
                     res.json({
                         status: "Error",
-                        data: "Fail to get data for " + req.params.index
+                        data: "Fail to get data for " + result
                     })
                 }
             }
